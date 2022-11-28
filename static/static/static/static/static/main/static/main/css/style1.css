@@ -1,0 +1,53 @@
+.header_is{
+    color:white;
+}
+header footer{
+    -moz-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+}
+.text-text{
+    position: absolute;
+    left: 300px;
+    top:20px;
+    font-family:"Fira Code Medium","DejaVu Math TeX Gyre","sans-serif";
+    font-size:20px;
+}
+.znak{
+    position:absolute;
+    left:75%;
+    top:20px;
+    pointer-events: none;
+}
+.text-almamater{
+    position: relative;
+    left:45%;
+    font-size:30px;
+    font-family:"Abyssinica SIL","sans-serif";
+    top:-350px;
+}
+.orel{
+    position: relative;
+    top:-200px;
+        pointer-events: none;
+}
+.backhead{
+    position: relative;
+    width: 120%;
+    height: 200px;
+    left: -200px;
+        pointer-events: none;
+}
+.backhead2{
+    position: relative;
+    width: 120%;
+    height: 300px;
+    top:800px;
+    left: -200px;
+        pointer-events: none;
+}
+.img_back{
+    width: 100%;
+    height:100%;
+    pointer-events: none;
+}

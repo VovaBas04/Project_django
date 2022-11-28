@@ -1,0 +1,46 @@
+.zag{
+    margin-left: 100px;
+    background-color:#37ff63;
+    font-size: 30px;
+}
+html, body {
+  background: #1a1f25;
+  font-family: 'Roboto', sans-serif;
+  color:#e6b333
+}
+.mid{
+    position: relative;
+    top:-300px;
+    background-color:#ff7841 ;
+}
+.have{
+    background-color:#2286ff;
+    font-size: 30px;
+}
+#h3{
+    color:#ff261c;
+    position: relative;
+    background-color:gold;
+    padding-left:50%;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+
+}
+a{
+    position: relative;
+    top:-400px;
+}
+.exit_now{
+    position: absolute;
+    top:50px;
+    left:90%;
+}
+span{
+    font-weight: bold;
+    font-size:30px ;
+}
+.my{
+    position: relative;
+    top:-200px
+}

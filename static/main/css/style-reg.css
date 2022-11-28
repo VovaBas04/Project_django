@@ -1,0 +1,54 @@
+input {
+  font-size:2rem !important;
+  width: 100%;
+  padding: 20px;
+  height: 60px;
+  border-radius: 3px;
+  margin: 5px 0;
+  outline: none;
+}
+label{
+  font-size: 1.5rem;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+  border: 1px solid white;
+  box-shadow: none;
+}
+
+.user-input:focus .user {
+  background: white !important;
+}
+
+input[type="text"],input[type="date"] {
+  background: transparent;
+  border: 2px solid #22272d;
+  padding-left: 45px;
+  color: #e6b333;
+}
+
+input[type="password"] {
+  background: transparent;
+  border: 2px solid #22272d;
+  padding-left: 45px;
+  color: #e6b333;
+}
+html, body {
+  background: #1a1f25;
+  font-family: 'Roboto', sans-serif;
+  color:#e6b333
+}
+select,option{
+  font-size: 2rem !important;
+  padding-left: 45px;
+  color: #e6b333 !important;
+  /*background: transparent;*/
+  box-shadow: none;
+    outline: none;
+  border-color: #1a1f25 !important;
+}
+select{
+  background-color: #1a1f25 !important;
+}
+.user-select:focus .user {
+  background: white !important;
+}
