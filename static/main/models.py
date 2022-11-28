@@ -10,14 +10,14 @@ class Date(models.Model):
         return str(self.data)
 class Autorization(models.Model):
     post_for_choise=[
-        ('НК',"начальник кафедры"),
+        ('НК',"заведующий кафедры"),
         ('ЗК',"заместитель начальника кафедры"),
         ("ПР","профессор"),
         ("ДЦ","доцент"),
         ("СП","старший преподаватель"),
         ("ПР","преподаватель"),
         ("ДК","докторант"),
-        ("АД","адъюнкт"),
+        ("АД","аспирант"),
         ("СН","старший научный сотрудник"),
         ("ЗН","заместитель начальника факультета"),
         ("НЛ","начальник лаборатории"),
@@ -27,19 +27,6 @@ class Autorization(models.Model):
         ("РМ","радиомеханик"),
         ("ЛБ","лаборант"),
         ("ТХ","техник"),
-    ]
-    rank_for_choises=[
-        ("ЛЙ","лейтенант"),
-        ("СЛ","старший лейтенант"),
-        ("КП", "капитан"),
-        ("МЙ", "майор"),
-        ("ПД", "подполковник"),
-        ("ПЛ", "полковник"),
-        ("ГМ", "генерал-майор"),
-        ("ГЛ", "генерал-лейтенант"),
-        ("ГП", "генерал-полковник"),
-        ("ГА", "генерал армии"),
-        ("ОТ","отсутствует"),
     ]
     degree_for_choises=[
         ("ктн","ктн"),
@@ -59,7 +46,6 @@ class Autorization(models.Model):
     dad=models.CharField('Отчество',max_length=20,null=True)
     birthday=models.DateField("День рождения",null=True)
     post=models.CharField("должность",max_length=2,choices=post_for_choise,default='ПР')
-    rank=models.CharField("в/звание",max_length=2,choices=rank_for_choises,default='ЛЙ')
     degree=models.CharField("уч.степень",max_length=3,choices=degree_for_choises,default='отс')
     scientist=models.CharField("уч.звание",max_length=3,choices=scientist_for_choises,default='отс')
     password=models.CharField('Пароль',max_length=20)

@@ -7,7 +7,7 @@ import datetime
 class AuthorizationForm(ModelForm):
     class Meta:
         model=Autorization
-        fields=['login','password','name','post',"rank","scientist","degree","dad","birthday"]
+        fields=['login','password','name','post',"scientist","degree","dad","birthday"]
         widgets={"login":TextInput(attrs={
             "type":"text",
             "name":"login",

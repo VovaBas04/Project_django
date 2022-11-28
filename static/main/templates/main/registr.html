@@ -36,11 +36,6 @@
         <option value="{{el.0}}">{{  el.1   }}</option>
         {% endfor %}
 </select><br>
-    <label for="rank">Звание</label>:  <select id="rank" name="rank" class="form-control">
-        {% for el in list1.rank_for_choises%}
-        <option value="{{el.0}}">{{  el.1   }}</option>
-        {% endfor %}
-</select><br>
 <label for="scientist"> Ученое звание:</label>
   <select name="scientist" id="scientist" class="form-control">
         {% for el in list1.scientist_for_choises%}

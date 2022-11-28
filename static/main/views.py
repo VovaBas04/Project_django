@@ -10,7 +10,7 @@ import requests
 import requests
 from bs4 import BeautifulSoup
 # Create your views here.
-works=["Учебная работа: ","Методическая работа: ","Научная работа: ","Редакционно-издательская работа: ","Воспитательная работа: ","Развитие УМБ: ","Другие работы: "]
+works=["Учебная работа: ","Учебно-методическая работа: ","Организационно-методическая работа: ","Повышение квалификации: ","Воспитательная работа: ","Контроль качества учебного процесса: ","Научно-методическая и научно-исследовательская работа: "]
 def my_first(request):
     if request.method=='POST':
         return render(request, 'main/registration.html')
@@ -146,11 +146,14 @@ def show_and_otchet(data,after='1971-1-1'):
     return [otchet,dont]
 def support_get_date_for_user():
     date=get_date_for_user()
-    if len(date)<=1:
+    if len(date)<1:
         return []
-    date.pop(len(date)-1)
+    elem=date.pop(len(date)-1)
     # (str(el.data), el.data.strftime("%d-%m-%Y"))
-    last_data=(date[0][1])
+    if len(date)!=0:
+        last_data=(date[0][1])
+    else:
+        last_data=add_week(elem,7)[1]
     last_data=datetime.date(int(last_data[6:10]),int(last_data[3:5]),int(last_data[0:2]))
     last_data=add_week(last_data)
     date.insert(0,(str(last_data),last_data.strftime("%d-%m-%Y")))
@@ -337,6 +340,7 @@ def show_table(request,znak):
             main=show_and_otchet(data)
             otchet=main[0]
             dont=main[1]
+            print(dont)
             return render(request,'main/otchet.html',{"list":otchet,"no":dont,"uploaded_file_url":True,'id':znak,'data':data,'after':'1971-1-1','flag_for_button':True})
 def full_show_table(request,znak):
     if request.method=='POST':
@@ -484,7 +488,7 @@ def upload_for_load(data,after):
              el.login.is_not_print):
                 if login_for_full != el.login.login:
                     if login_for_full != '':
-                        arr = [(str(sum_hour), 'Всего проведено часов:'), (str(sum_lec), " из них лекций:")]
+                        arr = [str(sum_hour), str(sum_lec)]
                         otchet.update({login_for_full: arr})
                         dont.remove(login_for_full)
                     sum_lec = el.lec
@@ -494,50 +498,10 @@ def upload_for_load(data,after):
                     sum_lec += el.lec
                     sum_hour += el.hour
         if login_for_full != '':
-            arr = [(str(sum_hour), 'Всего проведено часов:'), (str(sum_lec), " из них лекций:" )]
+            arr = [str(sum_hour), (str(sum_lec))]
             otchet.update({login_for_full: arr})
             dont.remove(login_for_full)
         return [otchet,dont]
-# def upload(request,data,after):
-#    if request.method=='POST':
-#     content = ''
-#     main=show_and_otchet(data,after)
-#     otchet=main[0]
-#     dont=main[1]
-#     arr=works.copy()
-#     arr.insert(1,"Всего проведено часов")
-#     arr.insert(2,"из них лекций")
-#     for el in otchet:
-#         content+=el+'\n'
-#         for text in otchet[el]:
-#             content+='\t'+text[1]+text[0]+'\n'
-#     content+='Не отчитались\n'
-#     print(otchet)
-#     for el in dont:
-#         content+=el+'\n'
-#     return render(request,'main/text.html',{"list":content,"caption":arr})
-# def upload(request,data,after):
-#    if request.method=='POST':
-#     content = ''.center(10)
-#     main=show_and_otchet(data,after)
-#     otchet=main[0]
-#     arr=works.copy()
-#     arr.insert(1,"Всего проведено часов")
-#     arr.insert(2,"из них лекций")
-#     for el in arr:
-#         content+=el.center(25)
-#     content+='\n'
-#     dont=main[1]
-#     for el in otchet:
-#         content+=el.center(10)
-#         for text in otchet[el]:
-#             content+=text[0].center(25)
-#         content+='\n'
-#     content+='Не отчитались\n'
-#     print(otchet)
-#     for el in dont:
-#         content+=el+'\n'
-#     return render(request,'main/text.html',{"list":content})
 def razdel(text,dict):
     len_works=len(works)
     start=len(works[0])
@@ -587,35 +551,42 @@ def show_and_otchet_load(data,after='1971-1-1'):
                     sum_hour += el.hour
                 dict_for_user=razdel(el.text,dict_for_user)
                 login_for_full = el.login.login
+                try:
+                    dont.remove(login_for_full)
+                except:
+                    pass
     dict_for_user.update({"Всего проведено часов": sum_hour})
     dict_for_user.update({"из них лекций": sum_lec})
     dict_for_table.update({login_for_full: list(dict_for_user.values())})
     return [dict_for_table,dont]
 def upload_for_study(request,data,after):
    if request.method=='POST':
-    content=''.center(10)+'Всего проведено часов'.center(30)+'из них лекций'.center(30)+'\n'
+    content=''
     main=upload_for_load(data,after)
     otchet=main[0]
     dont=main[1]
-    for el in otchet:
-        content+=el.center(10)
-        for text in otchet[el]:
-            content+=text[0].center(30)
-        content+='\n'
-    content+='\n\n\n'+'Не отчитались\n'
-    for el in dont:
-        content+=el+'\n'
-    return render(request,'main/text.html',{"list":content,"flag_for_list":True})
+    # for el in otchet:
+    #     content+=el.center(10)
+    #     for text in otchet[el]:
+    #         content+=text[0].center(30)
+    #     content+='\n'
+    # content+='\n\n\n'+'Не отчитались\n'
+    arr=["Фамилия","Проведено часов","из них лекций"]
+    print(arr)
+    print(otchet,"Для загрузки")
+    return render(request,'main/text.html',{"list":otchet,"flag_for_list":False,"caption":arr,"dont":dont})
 def upload(request,data,after):
    if request.method=='POST':
-    content=''.center(10)+'Всего проведено часов'.center(30)+'из них лекций'.center(30)+'\n'
+    # content=''.center(10)+'Всего проведено часов'.center(30)+'из них лекций'.center(30)+'\n'
     main=show_and_otchet_load(data,after)
     otchet=main[0]
+    print(otchet,"Обычный")
     dont=main[1]
-    for el in dont:
-        content+=el+'\n'
+    # for el in dont:
+    #     content+=el+'\n'
     arr=works.copy()
     arr.insert(0,"Фамилия")
     arr.append("Проведено часов")
     arr.append("из них лекций")
+    print(otchet,arr)
     return render(request,'main/text.html',{"list":otchet,"flag_for_list":False,"caption":arr,"dont":dont})

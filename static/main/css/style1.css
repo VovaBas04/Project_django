@@ -30,7 +30,6 @@ header footer{
     position: relative;
     top:-200px;
         pointer-events: none;
-    width:100px;
 }
 .backhead{
     position: relative;
