@@ -3,12 +3,14 @@
 {% block create %}
     <form role="form">
         {% csrf_token %}
+        <div>
     <label for="12345">Отчет с <select name="data" class="select_data" id="12345">
 
         {% for el in list %}
         <option value="{{el.0}}">{{  el.1   }}</option>
         {% endfor %}
     </select><br></label>
+    </div><br>
     <div class="data_after_admin">по</div>
    <div class="btn-group col-12">
   <button formaction="{% url 'otchet' id%}" formmethod="post" type="submit" value="otchet" class="form-control btn btn-light" >Отчет за неделю</button>
