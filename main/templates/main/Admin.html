@@ -3,12 +3,14 @@
 {% block create %}
     <form role="form">
         {% csrf_token %}
+        <div>
     <label for="12345">Отчет с <select name="data" class="select_data" id="12345">
 
         {% for el in list %}
         <option value="{{el.0}}">{{  el.1   }}</option>
         {% endfor %}
     </select><br></label>
+    </div><br>
     <div class="data_after_admin">по</div>
    <div class="btn-group col-12">
   <button formaction="{% url 'otchet' id%}" formmethod="post" type="submit" value="otchet" class="form-control btn btn-light" >Отчет за неделю</button>
@@ -21,9 +23,9 @@
       <li><button  data-bs-toggle="modal" data-bs-target="#ModalSrok"  id="load" type="button" value="otchet3" class="form-control btn btn-light dropdown-item">Отчет по учебной нагрузке</button></li>
   </ul>
 </div>
-        <button formaction="/admin/" formmethod="post" type="submit" value="admin" class="form-control btn btn-success">Кнопка для работы с бд</button>
+        <button formaction="/admin/" formmethod="post" type="submit" value="admin" class="form-control btn btn-success">Настройки</button>
     {% if flag %}
-        <label for="h_b">Предупреждать о дне рождении за:</label>
+        <label for="h_b">За сколько дней предупреждать о дне рождении</label>
         <input type="number" step="1" min="1" max="100" value={{befor}} id="h_b" name="h_b"/>
         <button formaction="{% url 'birthday' id%}" formmethod="post" type="submit" value="birthday" class="btn btn-dark">Сохранить работу с днем рождением</button>
     </form>

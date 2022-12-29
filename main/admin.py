@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group,User
 from .models import Autorization,Notes,Date,DatesForBirthday
 from django.contrib.auth.models import User
 
@@ -14,6 +15,6 @@ class DateAdmin(admin.ModelAdmin):
     list_display = ['data','archive']
     list_editable = ['archive']
 admin.site.register(Autorization,AutorizationAdmin)
-admin.site.register(Notes,NotesAdmin)
 admin.site.register(Date,DateAdmin)
-# admin.site.register(DatesForBirthday)
+admin.site.unregister(Group)
+admin.site.unregister(User)

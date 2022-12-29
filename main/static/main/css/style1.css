@@ -1,5 +1,7 @@
 .header_is{
     color:white;
+    position:relative;
+    margin-bottom:500px;
 }
 header footer{
     -moz-user-select: none !important;
